@@ -76,4 +76,62 @@ $("langToggle").onclick = () => {
   applyLanguage();
 };
 
-applyLanguage();
+function applyLanguage() {
+  const t = translations[currentLang];
+
+  document.querySelector(".hero h1").textContent = t.title;
+  document.querySelector(".hero p").textContent = t.subtitle;
+
+  $("loginOpen").textContent = t.login;
+  $("logout").textContent = t.logout;
+  $("addOpen").textContent = t.add;
+
+  $("search").placeholder = t.search;
+  $("empty").textContent = t.empty;
+
+  const firstOption = $("groupFilter").querySelector("option");
+  if (firstOption) firstOption.textContent = t.allGroups;
+
+  $("langToggle").textContent = currentLang === "id" ? "EN" : "ID";
+
+  const labelMap = {
+    name: t.name,
+    role: t.role,
+    age: t.age,
+    height: t.height,
+    hair: t.hair,
+    eyes: t.eyes,
+    power: t.power,
+    weapon: t.weapon,
+    group_name: t.group,
+    city: t.city,
+    description: t.description
+  };
+
+  Object.entries(labelMap).forEach(([id, text]) => {
+    const input = document.getElementById(id);
+
+    if (input) {
+      const label = input.closest("label");
+
+      if (label) {
+        const textNode = [...label.childNodes].find(
+          node => node.nodeType === Node.TEXT_NODE
+        );
+
+        if (textNode) {
+          textNode.textContent = text + " ";
+        }
+      }
+    }
+  });
+
+  const saveBtn = document.getElementById("save");
+  if (saveBtn) saveBtn.textContent = t.save;
+
+  const cancelBtn = document.getElementById("cancel");
+  if (cancelBtn) cancelBtn.textContent = t.cancel;
+
+  const deleteBtn = document.getElementById("delete");
+  if (deleteBtn) deleteBtn.textContent = t.delete;
+}
