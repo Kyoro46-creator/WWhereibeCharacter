@@ -1,14 +1,19 @@
-# Karakter Cerita — GitHub Pages
+# WWhereibe Character + Supabase
 
-Website statis untuk menampilkan database karakter dan foto sehingga dapat dilihat dari HP maupun PC.
+Fitur:
+- Pengunjung bisa melihat karakter dari HP/PC.
+- Admin login dari website.
+- Admin bisa tambah/edit/hapus karakter.
+- Foto di-upload langsung dari website.
+- Data tersimpan online di Supabase.
 
-## Menambah karakter
-1. Upload foto ke folder `images/`, misalnya `images/arul.jpg`.
-2. Buka `data/characters.json` lalu tambahkan objek karakter baru dengan format yang sama seperti contoh.
-3. Isi `image` dengan lokasi foto, misalnya `images/arul.jpg`.
-4. Commit perubahan. GitHub Pages akan memperbarui situs.
+## SETUP
+1. Buat project di Supabase.
+2. Buka SQL Editor dan jalankan `supabase-setup.sql`.
+3. Authentication > Users > Add user, lalu buat akun admin.
+4. Project Settings > API, copy Project URL dan anon/public key.
+5. Edit `js/config.js`, lalu masukkan kedua nilai tersebut.
+6. Upload semua file ke repository GitHub Pages Anda dan Commit.
+7. Tunggu deploy selesai, buka website, klik Login Admin.
 
-> Catatan: GitHub Pages adalah hosting statis. Tombol upload langsung dari pengunjung tidak disediakan karena perubahan permanen harus disimpan kembali ke repository atau menggunakan backend/database terpisah.
-
-## Publish
-Repository > Settings > Pages > Build and deployment > Source: Deploy from a branch > Branch: main > /(root) > Save.
+Catatan: jangan membagikan password akun admin. Anon/public key boleh berada di frontend; pembatasan tulis diatur lewat RLS dan autentikasi.

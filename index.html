@@ -1,1 +1,76 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>World Archive — Karakter Cerita</title><link rel="stylesheet" href="css/style.css"></head><body><header><div><p class="eyebrow">WORLD ARCHIVE</p><h1>Karakter Cerita</h1><p class="lead">Database karakter, kekuatan, kelompok, dan dunia cerita.</p></div><input id="search" placeholder="Cari karakter, kota, kelompok, kekuatan…"></header><main><section id="grid" class="grid"></section><div id="empty" class="empty">Tidak ada karakter yang cocok.</div></main><dialog id="detail"><button class="close" onclick="detail.close()">×</button><div id="detailBody"></div></dialog><footer>Data karakter disimpan di <b>data/characters.json</b> dan gambar di <b>images/</b>.</footer><script src="js/app.js"></script></body></html>
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>WWhereibe Character</title>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<header class="hero">
+  <div><div class="eyebrow">CHARACTER ARCHIVE</div><h1>WWhereibe Character</h1><p>Database karakter cerita yang bisa dilihat dari HP maupun PC.</p></div>
+  <div class="actions">
+    <button id="loginOpen" class="btn">Login Admin</button>
+    <button id="logout" class="btn hidden">Logout</button>
+    <button id="addOpen" class="btn primary hidden">+ Tambah Karakter</button>
+  </div>
+</header>
+<main class="container">
+  <div class="toolbar">
+    <input id="search" placeholder="Cari karakter...">
+    <select id="groupFilter"><option value="">Semua Kelompok</option></select>
+  </div>
+  <div id="status" class="status hidden"></div>
+  <section id="grid" class="grid"></section>
+  <div id="empty" class="empty hidden">Belum ada karakter.</div>
+</main>
+
+<dialog id="loginDialog">
+<form id="loginForm" class="modal">
+  <div class="head"><h2>Login Admin</h2><button type="button" data-close="loginDialog">×</button></div>
+  <label>Email<input id="email" type="email" required></label>
+  <label>Password<input id="password" type="password" required></label>
+  <button class="btn primary full">Masuk</button>
+</form>
+</dialog>
+
+<dialog id="charDialog">
+<form id="charForm" class="modal wide">
+  <div class="head"><h2 id="formTitle">Tambah Karakter</h2><button type="button" data-close="charDialog">×</button></div>
+  <input id="id" type="hidden"><input id="oldImage" type="hidden">
+  <div class="cols">
+    <div>
+      <label>Foto<input id="image" type="file" accept="image/*"></label>
+      <img id="preview" class="preview hidden">
+    </div>
+    <div class="formgrid">
+      <label>Nama *<input id="name" required></label>
+      <label>Peran<input id="role"></label>
+      <label>Umur<input id="age"></label>
+      <label>Tinggi<input id="height"></label>
+      <label>Rambut<input id="hair"></label>
+      <label>Mata<input id="eyes"></label>
+      <label>Kekuatan / Elemen<input id="power"></label>
+      <label>Senjata<input id="weapon"></label>
+      <label>Kelompok<input id="group_name"></label>
+      <label>Kota / Lokasi<input id="city"></label>
+    </div>
+  </div>
+  <label>Deskripsi<textarea id="description" rows="5"></textarea></label>
+  <div class="foot"><button type="button" id="deleteBtn" class="btn danger hidden">Hapus</button><span></span><button class="btn primary">Simpan</button></div>
+</form>
+</dialog>
+
+<dialog id="detailDialog">
+<article class="modal detail">
+  <div class="head"><h2 id="detailName"></h2><button type="button" data-close="detailDialog">×</button></div>
+  <img id="detailImage" class="detailimg">
+  <div id="detailMeta" class="meta"></div>
+  <p id="detailDesc"></p>
+  <button id="editBtn" class="btn primary hidden">Edit Karakter</button>
+</article>
+</dialog>
+
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
+</body></html>
