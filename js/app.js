@@ -50,49 +50,39 @@ const translations = {
     edit: "Edit Character"
   }
 };
-
 function applyLanguage() {
   const t = translations[currentLang];
+  if (!t) return;
 
-  document.querySelector(".hero h1").textContent = t.title;
-  document.querySelector(".hero p").textContent = t.subtitle;
+  const heroTitle = document.querySelector(".hero h1");
+  const heroSubtitle = document.querySelector(".hero p");
 
-  $("loginOpen").textContent = t.login;
-  $("logout").textContent = t.logout;
-  $("addOpen").textContent = t.add;
+  if (heroTitle) heroTitle.textContent = t.title;
+  if (heroSubtitle) heroSubtitle.textContent = t.subtitle;
 
-  $("search").placeholder = t.search;
-  $("empty").textContent = t.empty;
+  const loginOpen = document.getElementById("loginOpen");
+  const logout = document.getElementById("logout");
+  const addOpen = document.getElementById("addOpen");
+  const search = document.getElementById("search");
+  const empty = document.getElementById("empty");
+  const groupFilter = document.getElementById("groupFilter");
+  const langToggle = document.getElementById("langToggle");
 
-  const firstOption = $("groupFilter").querySelector("option");
-  if (firstOption) firstOption.textContent = t.allGroups;
+  if (loginOpen) loginOpen.textContent = t.login;
+  if (logout) logout.textContent = t.logout;
+  if (addOpen) addOpen.textContent = t.add;
 
-  $("langToggle").textContent = currentLang === "id" ? "EN" : "ID";
-}
+  if (search) search.placeholder = t.search;
+  if (empty) empty.textContent = t.empty;
 
-$("langToggle").onclick = () => {
-  currentLang = currentLang === "id" ? "en" : "id";
-  localStorage.setItem("siteLang", currentLang);
-  applyLanguage();
-};
+  if (groupFilter) {
+    const firstOption = groupFilter.querySelector("option");
+    if (firstOption) firstOption.textContent = t.allGroups;
+  }
 
-function applyLanguage() {
-  const t = translations[currentLang];
-
-  document.querySelector(".hero h1").textContent = t.title;
-  document.querySelector(".hero p").textContent = t.subtitle;
-
-  $("loginOpen").textContent = t.login;
-  $("logout").textContent = t.logout;
-  $("addOpen").textContent = t.add;
-
-  $("search").placeholder = t.search;
-  $("empty").textContent = t.empty;
-
-  const firstOption = $("groupFilter").querySelector("option");
-  if (firstOption) firstOption.textContent = t.allGroups;
-
-  $("langToggle").textContent = currentLang === "id" ? "EN" : "ID";
+  if (langToggle) {
+    langToggle.textContent = currentLang === "id" ? "EN" : "ID";
+  }
 
   const labelMap = {
     name: t.name,
@@ -119,7 +109,7 @@ function applyLanguage() {
           node => node.nodeType === Node.TEXT_NODE
         );
 
-        if (textNode) {
+        if (textNode && text) {
           textNode.textContent = text + " ";
         }
       }
@@ -127,11 +117,23 @@ function applyLanguage() {
   });
 
   const saveBtn = document.getElementById("save");
-  if (saveBtn) saveBtn.textContent = t.save;
-
   const cancelBtn = document.getElementById("cancel");
-  if (cancelBtn) cancelBtn.textContent = t.cancel;
-
   const deleteBtn = document.getElementById("delete");
-  if (deleteBtn) deleteBtn.textContent = t.delete;
+
+  if (saveBtn && t.save) saveBtn.textContent = t.save;
+  if (cancelBtn && t.cancel) cancelBtn.textContent = t.cancel;
+  if (deleteBtn && t.delete) deleteBtn.textContent = t.delete;
 }
+
+
+const langToggle = document.getElementById("langToggle");
+
+if (langToggle) {
+  langToggle.onclick = () => {
+    currentLang = currentLang === "id" ? "en" : "id";
+    localStorage.setItem("siteLang", currentLang);
+    applyLanguage();
+  };
+}
+
+applyLanguage();
