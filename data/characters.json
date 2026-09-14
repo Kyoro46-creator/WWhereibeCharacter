@@ -1,0 +1,15 @@
+[
+  {
+    "name":"Contoh Karakter",
+    "role":"Tokoh Utama",
+    "age":"17 tahun",
+    "height":"170 cm",
+    "hair":"Hitam",
+    "eyes":"Merah",
+    "power":"Pedang Kegelapan",
+    "group":"Dark Knight",
+    "city":"Kota Pohon Beringin",
+    "image":"images/placeholder.svg",
+    "description":"Ganti data contoh ini dengan karakter cerita Anda. Foto dapat dimasukkan ke folder images lalu ubah nama file pada kolom image."
+  }
+]
