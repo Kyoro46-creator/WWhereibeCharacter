@@ -24,3 +24,56 @@ document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>$(b.dataset.c
 sb.auth.onAuthStateChange((_e,s)=>{user=s?.user||null;authUI()});
 (async()=>{user=(await sb.auth.getSession()).data.session?.user||null;authUI();load()})();
 }
+let currentLang = localStorage.getItem("siteLang") || "id";
+
+const translations = {
+  id: {
+    title: "WWhereibe Character",
+    subtitle: "Database karakter cerita yang bisa dilihat dari HP maupun PC.",
+    login: "Login Admin",
+    logout: "Logout",
+    add: "+ Tambah Karakter",
+    search: "Cari karakter...",
+    allGroups: "Semua Kelompok",
+    empty: "Belum ada karakter.",
+    edit: "Edit Karakter"
+  },
+  en: {
+    title: "WWhereibe Character",
+    subtitle: "A story character database accessible from phone and PC.",
+    login: "Admin Login",
+    logout: "Logout",
+    add: "+ Add Character",
+    search: "Search characters...",
+    allGroups: "All Groups",
+    empty: "No characters yet.",
+    edit: "Edit Character"
+  }
+};
+
+function applyLanguage() {
+  const t = translations[currentLang];
+
+  document.querySelector(".hero h1").textContent = t.title;
+  document.querySelector(".hero p").textContent = t.subtitle;
+
+  $("loginOpen").textContent = t.login;
+  $("logout").textContent = t.logout;
+  $("addOpen").textContent = t.add;
+
+  $("search").placeholder = t.search;
+  $("empty").textContent = t.empty;
+
+  const firstOption = $("groupFilter").querySelector("option");
+  if (firstOption) firstOption.textContent = t.allGroups;
+
+  $("langToggle").textContent = currentLang === "id" ? "EN" : "ID";
+}
+
+$("langToggle").onclick = () => {
+  currentLang = currentLang === "id" ? "en" : "id";
+  localStorage.setItem("siteLang", currentLang);
+  applyLanguage();
+};
+
+applyLanguage();
