@@ -28,9 +28,9 @@ let currentLang = localStorage.getItem("siteLang") || "id";
 
 const translations = {
   id: {
-    title: "WWhereibe Character",
-    subtitle: "Database karakter cerita yang bisa dilihat dari HP maupun PC.",
-    login: "Login Admin",
+    title: "WORLD WHERE I BE UNIVERS",
+    subtitle: "Database karakter  .",
+    login: "CREATOR LOGIN",
     logout: "Logout",
     add: "+ Tambah Karakter",
     search: "Cari karakter...",
@@ -39,9 +39,9 @@ const translations = {
     edit: "Edit Karakter"
   },
   en: {
-    title: "WWhereibe Character",
-    subtitle: "A story character database accessible from phone and PC.",
-    login: "Admin Login",
+    title: "WORLD WHERE I BE UNIVERS",
+    subtitle: "A story character database.",
+    login: "CREATOR LOGIN",
     logout: "Logout",
     add: "+ Add Character",
     search: "Search characters...",
