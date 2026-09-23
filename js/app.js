@@ -28,7 +28,14 @@ async function upload(file){if(!file)return null;const ext=file.name.split(".").
 $("charForm").onsubmit=async e=>{e.preventDefault();try{let image=$("oldImage").value||null;if($("image").files[0])image=await upload($("image").files[0]);const p={name:$("name").value.trim(),role:$("role").value.trim()||null,age:$("age").value.trim()||null,height:$("height").value.trim()||null,hair:$("hair").value.trim()||null, eyes:$("eyes").value.trim()||null,power:$("power").value.trim()||null,weapon:$("weapon").value.trim()||null,group_name:$("group_name").value.trim()||null,city:$("city").value.trim()||null,story:$("story").value,first_chapter:parseInt($("first_chapter").value)||1,description:$("description").value.trim()||null,image_url:image};;const id=$("id").value;const r=id?await sb.from("characters").update(p).eq("id",id):await sb.from("characters").insert(p);if(r.error)throw r.error;$("charDialog").close();await load()}catch(err){alert(err.message)}}
 $("deleteBtn").onclick=async()=>{if(!confirm("Hapus karakter ini?"))return;const r=await sb.from("characters").delete().eq("id",$("id").value);if(r.error)return alert(r.error.message);$("charDialog").close();load()}
 $("image").onchange=e=>{const f=e.target.files[0];if(f){$("preview").src=URL.createObjectURL(f);$("preview").classList.remove("hidden")}}
-$("loginOpen").onclick=()=>$("loginDialog").showModal();$("addOpen").onclick=()=>{reset();$("charDialog").showModal()};$("logout").onclick=()=>sb.auth.signOut();$("editBtn").onclick=()=>selected&&edit(selected);$("search").oninput=render;$("groupFilter").onchange=render;
+const loginOpenBtn = document.getElementById("loginOpen");
+const loginDialog = document.getElementById("loginDialog");
+
+if (loginOpenBtn && loginDialog) {
+  loginOpenBtn.addEventListener("click", () => {
+    loginDialog.showModal();
+  });
+}$("addOpen").onclick=()=>{reset();$("charDialog").showModal()};$("logout").onclick=()=>sb.auth.signOut();$("editBtn").onclick=()=>selected&&edit(selected);$("search").oninput=render;$("groupFilter").onchange=render;
 $("loginForm").onsubmit=async e=>{e.preventDefault();const {error}=await sb.auth.signInWithPassword({email:$("email").value,password:$("password").value});if(error)return alert(error.message);$("loginDialog").close()}
 document.querySelectorAll("[data-close]").forEach(b=>b.onclick=()=>$(b.dataset.close).close());
 sb.auth.onAuthStateChange((_e,s)=>{user=s?.user||null;authUI()});
