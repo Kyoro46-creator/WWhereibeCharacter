@@ -953,16 +953,22 @@ document.addEventListener(
 const storyFromLink = params.get("story");
 const chapterFromLink = params.get("chapter");
 
-// Jika link memiliki story, pilih cerita secara otomatis
-if (storyFromLink && $("storyFilter")) {
-  $("storyFilter").value = storyFromLink;
+// Jika tidak ada story/chapter di URL,
+// gunakan Where I Be Chapter 1 sebagai tampilan aman
+const activeStory = storyFromLink || "Where I Be";
+const activeChapter = chapterFromLink || "1";
+
+if ($("storyFilter")) {
+  $("storyFilter").value = activeStory;
 }
 
-// Jika link memiliki chapter, tetapkan batas chapter
-if (chapterFromLink && $("chapterFilter")) {
-  $("chapterFilter").value = chapterFromLink;
+if ($("chapterFilter")) {
+  $("chapterFilter").value = activeChapter;
 
-  // Sembunyikan kolom chapter dari pembaca
+  // Sembunyikan pilihan chapter dari pengunjung
   $("chapterFilter").classList.add("hidden");
 }
+
+await initializeSupabase();
+  }
 );
