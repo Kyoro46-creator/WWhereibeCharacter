@@ -162,19 +162,31 @@ function authUI() {
   const storyFilter = $("storyFilter");
 
   if (user) {
-    if (chapterFilter) {
-      chapterFilter.classList.remove("hidden");
-      chapterFilter.value = "";
-    }
-
-    if (storyFilter) {
-      storyFilter.value = "";
-    }
-
-    if (typeof render === "function") {
-      render();
-    }
+  // CREATOR MODE
+  if (chapterFilter) {
+    chapterFilter.classList.remove("hidden");
+    chapterFilter.style.display = "";
+    chapterFilter.value = "";
   }
+
+  if (storyFilter) {
+    storyFilter.value = "";
+  }
+
+  if (typeof render === "function") {
+    render();
+  }
+
+} else {
+  // READER MODE
+  const params = new URLSearchParams(window.location.search);
+  const chapterFromLink = params.get("chapter");
+
+  if (chapterFilter) {
+    chapterFilter.value = chapterFromLink || "1";
+    chapterFilter.classList.add("hidden");
+  }
+ }
 }
 
 /* =========================================================
