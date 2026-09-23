@@ -155,4 +155,11 @@ if (langToggle) {
 
 applyLanguage();
 
+  const creatorLoginBtn = document.getElementById("loginOpen");
+const creatorLoginDialog = document.getElementById("loginDialog");
+
+if (creatorLoginBtn && creatorLoginDialog) {
+  creatorLoginBtn.onclick = function () {
+    creatorLoginDialog.showModal();
+  };
 }
