@@ -7,7 +7,17 @@ if((cfg.SUPABASE_URL||"").includes("PASTE_")||(cfg.SUPABASE_ANON_KEY||"").includ
 const sb=supabase.createClient(cfg.SUPABASE_URL,cfg.SUPABASE_ANON_KEY);
 let chars=[],user=null,selected=null;
 const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-function authUI(){ $("loginOpen").classList.toggle("hidden",!!user); $("logout").classList.toggle("hidden",!user); $("addOpen").classList.toggle("hidden",!user); $("editBtn").classList.toggle("hidden",!user); }
+function authUI() {
+  const loginOpen = $("loginOpen");
+  const logout = $("logout");
+  const addOpen = $("addOpen");
+  const editBtn = $("editBtn");
+
+  if (loginOpen) loginOpen.classList.toggle("hidden", !!user);
+  if (logout) logout.classList.toggle("hidden", !user);
+  if (addOpen) addOpen.classList.toggle("hidden", !user);
+  if (editBtn) editBtn.classList.toggle("hidden", !user);
+}
 async function load(){ const {data,error}=await sb.from("characters").select("*").order("created_at",{ascending:false}); if(error){$("status").textContent=error.message;$("status").classList.remove("hidden");return;} chars=data||[]; groups(); render(); }
 function groups(){const gs=[...new Set(chars.map(x=>x.group_name).filter(Boolean))].sort();$("groupFilter").innerHTML='<option value="">Semua Kelompok</option>'+gs.map(g=>`<option>${esc(g)}</option>`).join("")}
 function render(){const q=$("search").value.toLowerCase(),g=$("groupFilter").value;const rows=chars.filter(c=>[c.name,c.role,c.power,c.weapon,c.group_name,c.city,c.description].join(" ").toLowerCase().includes(q)&&(!g||c.group_name===g));$("grid").innerHTML=rows.map(c=>`<article class="card" data-id="${c.id}">${c.image_url?`<img src="${esc(c.image_url)}">`:`<div class="noimg">Tanpa Foto</div>`}<div class="body"><h3>${esc(c.name)}</h3><div class="muted">${esc(c.role||"")}</div><div class="tags">${c.power?`<span class="tag">${esc(c.power)}</span>`:""}${c.weapon?`<span class="tag">${esc(c.weapon)}</span>`:""}${c.group_name?`<span class="tag">${esc(c.group_name)}</span>`:""}</div></div></article>`).join("");$("empty").classList.toggle("hidden",rows.length>0);document.querySelectorAll(".card").forEach(x=>x.onclick=()=>detail(x.dataset.id))}
