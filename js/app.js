@@ -147,20 +147,33 @@ function applyLanguage() {
 ========================================================= */
 
 function authUI() {
-  if ($("loginOpen")) {
-    $("loginOpen").classList.toggle("hidden", !!user);
-  }
+  const loginOpen = $("loginOpen");
+  const logout = $("logout");
+  const addOpen = $("addOpen");
+  const editBtn = $("editBtn");
 
-  if ($("logout")) {
-    $("logout").classList.toggle("hidden", !user);
-  }
+  if (loginOpen) loginOpen.classList.toggle("hidden", !!user);
+  if (logout) logout.classList.toggle("hidden", !user);
+  if (addOpen) addOpen.classList.toggle("hidden", !user);
+  if (editBtn) editBtn.classList.toggle("hidden", !user);
 
-  if ($("addOpen")) {
-    $("addOpen").classList.toggle("hidden", !user);
-  }
+  // Mode Creator
+  const chapterFilter = $("chapterFilter");
+  const storyFilter = $("storyFilter");
 
-  if ($("editBtn")) {
-    $("editBtn").classList.toggle("hidden", !user);
+  if (user) {
+    if (chapterFilter) {
+      chapterFilter.classList.remove("hidden");
+      chapterFilter.value = "";
+    }
+
+    if (storyFilter) {
+      storyFilter.value = "";
+    }
+
+    if (typeof render === "function") {
+      render();
+    }
   }
 }
 
