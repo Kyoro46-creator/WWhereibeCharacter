@@ -947,6 +947,20 @@ document.addEventListener(
 
     authUI();
 
+    // Membaca story dan chapter dari link
+    const params = new URLSearchParams(window.location.search);
+
+    const storyFromLink = params.get("story");
+    const chapterFromLink = params.get("chapter");
+
+    if (storyFromLink && $("storyFilter")) {
+      $("storyFilter").value = storyFromLink;
+    }
+
+    if (chapterFromLink && $("chapterFilter")) {
+      $("chapterFilter").value = chapterFromLink;
+    }
+
     await initializeSupabase();
   }
 );
