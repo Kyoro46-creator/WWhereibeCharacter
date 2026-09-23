@@ -950,17 +950,19 @@ document.addEventListener(
     // Membaca story dan chapter dari link
     const params = new URLSearchParams(window.location.search);
 
-    const storyFromLink = params.get("story");
-    const chapterFromLink = params.get("chapter");
+const storyFromLink = params.get("story");
+const chapterFromLink = params.get("chapter");
 
-    if (storyFromLink && $("storyFilter")) {
-      $("storyFilter").value = storyFromLink;
-    }
+// Jika link memiliki story, pilih cerita secara otomatis
+if (storyFromLink && $("storyFilter")) {
+  $("storyFilter").value = storyFromLink;
+}
 
-    if (chapterFromLink && $("chapterFilter")) {
-      $("chapterFilter").value = chapterFromLink;
-    }
+// Jika link memiliki chapter, tetapkan batas chapter
+if (chapterFromLink && $("chapterFilter")) {
+  $("chapterFilter").value = chapterFromLink;
 
-    await initializeSupabase();
-  }
+  // Sembunyikan kolom chapter dari pembaca
+  $("chapterFilter").classList.add("hidden");
+}
 );
