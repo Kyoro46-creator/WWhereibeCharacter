@@ -17,10 +17,26 @@
   </div>
 </header>
 <main class="container">
-  <div class="toolbar">
-    <input id="search" placeholder="Cari karakter...">
-    <select id="groupFilter"><option value="">Semua Kelompok</option></select>
-  </div>
+ <div class="toolbar">
+  <input id="search" placeholder="Cari karakter...">
+
+  <select id="storyFilter">
+    <option value="">Semua Cerita</option>
+    <option value="Where I Be">Where I Be</option>
+    <option value="The Dimension">The Dimension</option>
+  </select>
+
+  <input
+    id="chapterFilter"
+    type="number"
+    min="1"
+    placeholder="Chapter terakhir"
+  >
+
+  <select id="groupFilter">
+    <option value="">Semua Kelompok</option>
+  </select>
+</div>
   <div id="status" class="status hidden"></div>
   <section id="grid" class="grid"></section>
   <div id="empty" class="empty hidden">Belum ada karakter.</div>
@@ -55,6 +71,18 @@
       <label>Senjata<input id="weapon"></label>
       <label>Kelompok<input id="group_name"></label>
       <label>Kota / Lokasi<input id="city"></label>
+
+      <label>Cerita
+  <select id="story">
+    <option value="Where I Be">Where I Be</option>
+    <option value="The Dimension">The Dimension</option>
+  </select>
+</label>
+
+<label>Pertama Muncul
+  <input id="first_chapter" type="number" min="1" value="1">
+</label>
+      
     </div>
   </div>
   <label>Deskripsi<textarea id="description" rows="5"></textarea></label>
