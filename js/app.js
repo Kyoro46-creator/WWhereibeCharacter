@@ -168,7 +168,7 @@ function authUI() {
       chapterFilter.classList.remove("hidden");
       chapterFilter.style.display = "";
       chapterFilter.value = "";
-    }
+      }
 
     if (copyReaderLink) {
       copyReaderLink.classList.remove("hidden");
