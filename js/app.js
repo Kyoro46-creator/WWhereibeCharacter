@@ -157,44 +157,46 @@ function authUI() {
   if (addOpen) addOpen.classList.toggle("hidden", !user);
   if (editBtn) editBtn.classList.toggle("hidden", !user);
 
-  // Mode Creator
   const chapterFilter = $("chapterFilter");
   const storyFilter = $("storyFilter");
   const copyReaderLink = $("copyReaderLink");
 
   if (user) {
-  // CREATOR MODE
-  if (chapterFilter) {
-    chapterFilter.classList.remove("hidden");
-    chapterFilter.style.display = "";
-    chapterFilter.value = "";
-  if (copyReaderLink) {
-  copyReaderLink.classList.remove("hidden");  
-  }
+    // CREATOR MODE
 
-  if (storyFilter) {
-    storyFilter.value = "";
-  }
+    if (chapterFilter) {
+      chapterFilter.classList.remove("hidden");
+      chapterFilter.style.display = "";
+      chapterFilter.value = "";
+    }
 
-  if (typeof render === "function") {
-    render();
-  }
+    if (copyReaderLink) {
+      copyReaderLink.classList.remove("hidden");
+    }
 
-} else {
+    if (storyFilter) {
+      storyFilter.value = "";
+    }
+
+    if (typeof render === "function") {
+      render();
+    }
+
+  } else {
     // READER MODE
 
     if (copyReaderLink) {
-        copyReaderLink.classList.add("hidden");
+      copyReaderLink.classList.add("hidden");
     }
 
     const params = new URLSearchParams(window.location.search);
     const chapterFromLink = params.get("chapter");
 
     if (chapterFilter) {
-        chapterFilter.value = chapterFromLink || "1";
-        chapterFilter.classList.add("hidden");
+      chapterFilter.value = chapterFromLink || "1";
+      chapterFilter.classList.add("hidden");
     }
-}
+  }
 }
 
 /* =========================================================
