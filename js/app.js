@@ -160,6 +160,7 @@ function authUI() {
   // Mode Creator
   const chapterFilter = $("chapterFilter");
   const storyFilter = $("storyFilter");
+  const copyReaderLink = $("copyReaderLink");
 
   if (user) {
   // CREATOR MODE
@@ -167,6 +168,8 @@ function authUI() {
     chapterFilter.classList.remove("hidden");
     chapterFilter.style.display = "";
     chapterFilter.value = "";
+  if (copyReaderLink) {
+  copyReaderLink.classList.remove("hidden");  
   }
 
   if (storyFilter) {
@@ -178,6 +181,8 @@ function authUI() {
   }
 
 } else {
+  if (copyReaderLink) {
+  copyReaderLink.classList.add("hidden");   
   // READER MODE
   const params = new URLSearchParams(window.location.search);
   const chapterFromLink = params.get("chapter");
