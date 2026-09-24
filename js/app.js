@@ -942,7 +942,54 @@ function setupEvents() {
     "input",
     render
   );
+/* Copy Reader Link */
 
+$("copyReaderLink")?.addEventListener(
+  "click",
+  async () => {
+    const story = $("storyFilter")?.value || "";
+    const chapter = $("chapterFilter")?.value || "";
+
+    if (!story) {
+      alert("Pilih cerita terlebih dahulu.");
+      return;
+    }
+
+    if (!chapter || Number(chapter) < 1) {
+      alert("Masukkan chapter terlebih dahulu.");
+      return;
+    }
+
+    const url = new URL(window.location.href);
+
+    // Bersihkan parameter lama
+    url.search = "";
+
+    // Buat link pembaca baru
+    url.searchParams.set("story", story);
+    url.searchParams.set("chapter", chapter);
+
+    try {
+      await navigator.clipboard.writeText(url.toString());
+
+      alert(
+        "Reader Link berhasil disalin!\n\n" +
+        story +
+        " - Chapter " +
+        chapter
+      );
+    } catch (error) {
+      console.error(error);
+
+      prompt(
+        "Copy link berikut:",
+        url.toString()
+      );
+    }
+  }
+);
+
+/* Group */
   /* Group */
 
   $("groupFilter")?.addEventListener(
