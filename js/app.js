@@ -944,11 +944,16 @@ function setupEvents() {
   );
 /* Copy Reader Link */
 
-$("copyReaderLink")?.addEventListener(
-  "click",
-  async () => {
-    const story = $("storyFilter")?.value || "";
-    const chapter = $("chapterFilter")?.value || "";
+const copyReaderLinkBtn = $("copyReaderLink");
+
+if (copyReaderLinkBtn) {
+  copyReaderLinkBtn.addEventListener("click", async () => {
+
+    const storyFilter = $("storyFilter");
+    const chapterFilter = $("chapterFilter");
+
+    const story = storyFilter ? storyFilter.value : "";
+    const chapter = chapterFilter ? chapterFilter.value : "";
 
     if (!story) {
       alert("Pilih cerita terlebih dahulu.");
@@ -956,38 +961,43 @@ $("copyReaderLink")?.addEventListener(
     }
 
     if (!chapter || Number(chapter) < 1) {
-      alert("Masukkan chapter terlebih dahulu.");
+      alert("Masukkan Latest Chapter terlebih dahulu.");
       return;
     }
 
     const url = new URL(window.location.href);
 
-    // Bersihkan parameter lama
+    // Hapus parameter lama
     url.search = "";
 
-    // Buat link pembaca baru
+    // Buat Reader Link
     url.searchParams.set("story", story);
     url.searchParams.set("chapter", chapter);
 
+    const readerLink = url.toString();
+
     try {
-      await navigator.clipboard.writeText(url.toString());
+      await navigator.clipboard.writeText(readerLink);
 
       alert(
         "Reader Link berhasil disalin!\n\n" +
         story +
         " - Chapter " +
-        chapter
+        chapter +
+        "\n\n" +
+        readerLink
       );
+
     } catch (error) {
-      console.error(error);
+      console.error("Clipboard gagal:", error);
 
       prompt(
         "Copy link berikut:",
-        url.toString()
+        readerLink
       );
     }
-  }
-);
+  });
+}
 
 /* Group */
   /* Group */
