@@ -229,13 +229,57 @@ async function load() {
 
   showStatus("");
 
-  const { data, error } = await sb
-    .from("characters")
-    .select("*")
-    .order("created_at", { ascending: false });
+  let data = null;
+  let error = null;
+
+  const params = new URLSearchParams(window.location.search);
+  const readerToken = params.get("token");
+
+  /*
+    CREATOR MODE
+    Creator tetap mendapatkan seluruh karakter.
+  */
+  if (user) {
+
+    const result = await sb
+      .from("characters")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    data = result.data;
+    error = result.error;
+
+  /*
+    READER MODE + TOKEN
+    Data dibatasi langsung oleh Supabase.
+  */
+  } else if (readerToken) {
+
+    const result = await sb.rpc(
+      "get_reader_characters",
+      {
+        reader_token: readerToken
+      }
+    );
+
+    data = result.data;
+    error = result.error;
+
+  /*
+    READER TANPA TOKEN
+    Tidak mengambil seluruh database.
+  */
+  } else {
+
+    data = [];
+    error = null;
+  }
 
   if (error) {
+    console.error("Gagal memuat karakter:", error);
     showStatus(error.message, true);
+    chars = [];
+    render();
     return;
   }
 
