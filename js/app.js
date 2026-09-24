@@ -942,7 +942,7 @@ function setupEvents() {
     "input",
     render
   );
-/* Copy Reader Link */
+/* Copy Reader Link - TOKEN */
 
 const copyReaderLinkBtn = $("copyReaderLink");
 
@@ -965,14 +965,34 @@ if (copyReaderLinkBtn) {
       return;
     }
 
+    // Buat token acak
+    const token =
+      crypto.randomUUID().replaceAll("-", "") +
+      crypto.randomUUID().replaceAll("-", "");
+
+    // Simpan token ke Supabase
+    const { error } = await sb
+      .from("reader_links")
+      .insert({
+        token: token,
+        story: story,
+        max_chapter: Number(chapter)
+      });
+
+    if (error) {
+      console.error("Gagal membuat Reader Link:", error);
+      alert("Gagal membuat Reader Link: " + error.message);
+      return;
+    }
+
+    // Buat URL pembaca
     const url = new URL(window.location.href);
 
-    // Hapus parameter lama
+    // Hilangkan parameter lama
     url.search = "";
 
-    // Buat Reader Link
-    url.searchParams.set("story", story);
-    url.searchParams.set("chapter", chapter);
+    // Hanya token yang dimasukkan ke URL
+    url.searchParams.set("token", token);
 
     const readerLink = url.toString();
 
@@ -980,7 +1000,7 @@ if (copyReaderLinkBtn) {
       await navigator.clipboard.writeText(readerLink);
 
       alert(
-        "Reader Link berhasil disalin!\n\n" +
+        "Reader Link berhasil dibuat dan disalin!\n\n" +
         story +
         " - Chapter " +
         chapter +
@@ -992,7 +1012,7 @@ if (copyReaderLinkBtn) {
       console.error("Clipboard gagal:", error);
 
       prompt(
-        "Copy link berikut:",
+        "Reader Link berhasil dibuat. Copy link berikut:",
         readerLink
       );
     }
