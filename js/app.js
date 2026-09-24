@@ -181,17 +181,20 @@ function authUI() {
   }
 
 } else {
-  if (copyReaderLink) {
-  copyReaderLink.classList.add("hidden");   
-  // READER MODE
-  const params = new URLSearchParams(window.location.search);
-  const chapterFromLink = params.get("chapter");
+    // READER MODE
 
-  if (chapterFilter) {
-    chapterFilter.value = chapterFromLink || "1";
-    chapterFilter.classList.add("hidden");
-  }
- }
+    if (copyReaderLink) {
+        copyReaderLink.classList.add("hidden");
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const chapterFromLink = params.get("chapter");
+
+    if (chapterFilter) {
+        chapterFilter.value = chapterFromLink || "1";
+        chapterFilter.classList.add("hidden");
+    }
+}
 }
 
 /* =========================================================
