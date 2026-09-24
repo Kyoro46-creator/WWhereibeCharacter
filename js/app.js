@@ -1119,10 +1119,10 @@ document.addEventListener(
 
     if (tokenFromLink) {
 
-      const { data, error } = await sb
-        .from("reader_links")
-        .select("story, max_chapter")
-        .eq("token", tokenFromLink)
+     const { data, error } = await sb
+        .rpc("get_reader_access", {
+          reader_token: tokenFromLink
+        })
         .maybeSingle();
 
       if (error) {
