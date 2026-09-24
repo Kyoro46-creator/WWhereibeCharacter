@@ -1053,34 +1053,102 @@ if (copyReaderLinkBtn) {
 document.addEventListener(
   "DOMContentLoaded",
   async () => {
-    setupEvents();
 
+    setupEvents();
     applyLanguage();
+
+    // Jalankan Supabase terlebih dahulu
+    await initializeSupabase();
+
+    const params = new URLSearchParams(window.location.search);
+
+    const tokenFromLink = params.get("token");
+    const storyFromLink = params.get("story");
+    const chapterFromLink = params.get("chapter");
+
+    let activeStory = "Where I Be";
+    let activeChapter = "1";
+
+    /* =========================================
+       TOKEN READER LINK
+    ========================================= */
+
+    if (tokenFromLink) {
+
+      const { data, error } = await sb
+        .from("reader_links")
+        .select("story, max_chapter")
+        .eq("token", tokenFromLink)
+        .maybeSingle();
+
+      if (error) {
+        console.error("Gagal membaca Reader Token:", error);
+
+        alert(
+          "Reader Link tidak dapat dibaca."
+        );
+
+      } else if (!data) {
+
+        alert(
+          "Reader Link tidak valid atau sudah tidak tersedia."
+        );
+
+      } else {
+
+        activeStory = data.story;
+        activeChapter = String(data.max_chapter);
+      }
+
+    }
+
+    /* =========================================
+       LINK LAMA
+       sementara tetap didukung
+    ========================================= */
+
+    else {
+
+      activeStory =
+        storyFromLink || "Where I Be";
+
+      activeChapter =
+        chapterFromLink || "1";
+    }
+
+    /* =========================================
+       TERAPKAN BATAS READER
+    ========================================= */
+
+    if ($("storyFilter")) {
+      $("storyFilter").value = activeStory;
+    }
+
+    if ($("chapterFilter")) {
+      $("chapterFilter").value = activeChapter;
+
+      // Sembunyikan Latest Chapter dari Reader
+      if (!user) {
+        $("chapterFilter").classList.add("hidden");
+      }
+    }
 
     authUI();
 
-    // Membaca story dan chapter dari link
-    const params = new URLSearchParams(window.location.search);
+    // authUI reader mode masih membaca ?chapter=
+    // jadi pasang kembali nilai dari token setelah authUI()
+    if (!user) {
 
-const storyFromLink = params.get("story");
-const chapterFromLink = params.get("chapter");
+      if ($("storyFilter")) {
+        $("storyFilter").value = activeStory;
+      }
 
-// Jika tidak ada story/chapter di URL,
-// gunakan Where I Be Chapter 1 sebagai tampilan aman
-const activeStory = storyFromLink || "Where I Be";
-const activeChapter = chapterFromLink || "1";
+      if ($("chapterFilter")) {
+        $("chapterFilter").value = activeChapter;
+        $("chapterFilter").classList.add("hidden");
+      }
 
-if ($("storyFilter")) {
-  $("storyFilter").value = activeStory;
-}
-
-if ($("chapterFilter")) {
-  $("chapterFilter").value = activeChapter;
-
-  // Sembunyikan pilihan chapter dari pengunjung
-  $("chapterFilter").classList.add("hidden");
-}
-
-await initializeSupabase();
+      render();
+    }
   }
 );
