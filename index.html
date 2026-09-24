@@ -17,17 +17,12 @@
   </div>
 </header>
 <main class="container">
- <div class="toolbar">
+<div class="toolbar">
+
   <input
-  id="chapterFilter"
-  type="number"
-  min="1"
-  placeholder="Chapter terakhir"
-    >
-   
-  <button id="copyReaderLink" class="btn hidden" type="button">
-  Copy Reader Link
-</button> 
+    id="search"
+    placeholder="Cari karakter..."
+  >
 
   <select id="storyFilter">
     <option value="">Semua Cerita</option>
@@ -39,12 +34,21 @@
     id="chapterFilter"
     type="number"
     min="1"
-    placeholder="Chapter terakhir"
+    placeholder="Latest Chapter"
   >
+
+  <button
+    id="copyReaderLink"
+    class="btn hidden"
+    type="button"
+  >
+    Copy Reader Link
+  </button>
 
   <select id="groupFilter">
     <option value="">Semua Kelompok</option>
   </select>
+
 </div>
   <div id="status" class="status hidden"></div>
   <section id="grid" class="grid"></section>
