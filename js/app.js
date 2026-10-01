@@ -15,7 +15,7 @@ let currentLang = localStorage.getItem("siteLang") || "id";
 
 const translations = {
   id: {
-    title: "WORLD WHERE I BE UNIVERS",
+    title: "CrossVerse Stories",
     subtitle: "Database karakter Cerita Original Nan46.",
     login: "CREATOR LOGIN",
     logout: "Logout",
@@ -47,7 +47,7 @@ const translations = {
   },
 
   en: {
-    title: "WORLD WHERE I BE UNIVERS",
+    title: "CrossVerse Stories",
     subtitle: "Original Story Character Database by Nan46.",
     login: "CREATOR LOGIN",
     logout: "Logout",
