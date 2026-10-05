@@ -45,3 +45,17 @@ dialog::backdrop {
   background: rgba(11, 16, 32, 0.7);
   backdrop-filter: blur(6px); 
 }
+
+
+.grid {
+  
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+}
+
+
+.card img {
+  width: 100%;
+  aspect-ratio: 2/3; 
+  object-fit: contain; 
+  background: #0a0f1d; 
+}
