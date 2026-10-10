@@ -464,8 +464,10 @@ button:focus-visible,
       rgba(8, 11, 22, 0.58) 48%,
       rgba(8, 11, 22, 0.18) 100%
     ),
-    url("../images/universe-banner.png")
-      center 48% / cover no-repeat;
+    url("/WWhereibeCharacter/images/universe-banner.png");
+  background-position: center, center 48%;
+  background-size: cover, cover;
+  background-repeat: no-repeat;
 }
 
 .hero-atmosphere {
