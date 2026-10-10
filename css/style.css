@@ -477,3 +477,141 @@ button:focus-visible,
     transparent 65%
   );
 }
+
+
+/* =========================================
+   CINEMATIC CHARACTER DETAIL
+========================================= */
+
+#detailDialog {
+  width: min(960px, 94vw);
+  max-width: 94vw;
+  max-height: 90vh;
+  padding: 0;
+  overflow: auto;
+  background: #0b1020;
+  border: 1px solid rgba(167, 139, 250, 0.3);
+  border-radius: 20px;
+  color: #f1f5ff;
+  box-shadow:
+    0 25px 90px rgba(0, 0, 0, 0.65),
+    0 0 35px rgba(124, 93, 255, 0.1);
+}
+
+#detailDialog .modal.detail {
+  padding: clamp(16px, 3vw, 30px);
+  background:
+    radial-gradient(
+      ellipse at top right,
+      rgba(100, 70, 190, 0.12),
+      transparent 50%
+    ),
+    #0b1020;
+}
+
+#detailDialog .head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(167, 139, 250, 0.25);
+}
+
+#detailDialog .head h2 {
+  margin: 0;
+  color: #f5f3ff;
+  font-size: clamp(24px, 4vw, 36px);
+  letter-spacing: -0.035em;
+}
+
+#detailDialog .detailimg {
+  width: 100%;
+  height: auto;
+  max-height: 65vh;
+  object-fit: contain;
+  border: 1px solid rgba(167, 139, 250, 0.2);
+  border-radius: 14px;
+  background: #080b16;
+}
+
+#detailDialog .meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 20px;
+}
+
+#detailDialog .meta > div {
+  min-width: 0;
+  padding: 14px 16px;
+  border: 1px solid rgba(140, 157, 202, 0.13);
+  border-radius: 12px;
+  background: linear-gradient(
+    135deg,
+    rgba(23, 32, 54, 0.9),
+    rgba(13, 19, 34, 0.9)
+  );
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+#detailDialog .meta > div:hover {
+  transform: translateY(-2px);
+  border-color: rgba(167, 139, 250, 0.4);
+  box-shadow: 0 7px 22px rgba(0, 0, 0, 0.18);
+}
+
+#detailDialog .meta small,
+#detailDialog .meta strong {
+  display: block;
+}
+
+#detailDialog .meta small {
+  margin-bottom: 5px;
+  color: #9daed4;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+}
+
+#detailDialog .meta strong {
+  color: #f4f6ff;
+  font-size: 16px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+#detailDialog #detailDesc {
+  margin-top: 20px;
+  padding: 18px;
+  color: #c6cfe4;
+  line-height: 1.85;
+  white-space: pre-wrap;
+  border-left: 2px solid #9271ee;
+  border-radius: 0 10px 10px 0;
+  background: rgba(19, 26, 45, 0.7);
+}
+
+#detailDialog #editBtn {
+  margin-top: 12px;
+}
+
+@media (max-width: 520px) {
+  #detailDialog {
+    width: 96vw;
+    max-width: 96vw;
+    max-height: 92vh;
+  }
+
+  #detailDialog .meta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  #detailDialog .modal.detail {
+    padding: 14px;
+  }
+}
