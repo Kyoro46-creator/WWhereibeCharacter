@@ -453,3 +453,25 @@ button:focus-visible,
     width: 100%;
   }
 }
+
+
+/* Universe cinematic banner */
+.cinematic-hero {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(8, 11, 22, 0.88) 0%,
+      rgba(8, 11, 22, 0.58) 48%,
+      rgba(8, 11, 22, 0.18) 100%
+    ),
+    url("../images/universe-banner.png")
+      center 48% / cover no-repeat;
+}
+
+.hero-atmosphere {
+  background: linear-gradient(
+    0deg,
+    rgba(8, 11, 22, 0.3),
+    transparent 65%
+  );
+}
