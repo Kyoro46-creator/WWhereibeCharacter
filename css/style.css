@@ -16,3 +16,240 @@
   object-fit: contain;
   background: #111827;
 }
+
+:root {
+  color-scheme: dark;
+  --cinema-bg: #080b16;
+  --cinema-panel: #11182a;
+  --cinema-border: rgba(155, 174, 255, 0.2);
+  --cinema-purple: #a78bfa;
+  --cinema-blue: #7dd3fc;
+  --cinema-text: #f1f5ff;
+  --cinema-muted: #aab5d0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--cinema-bg);
+}
+
+body {
+  margin: 0;
+  color: var(--cinema-text);
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(91, 63, 170, 0.2), transparent 38rem),
+    radial-gradient(ellipse at 90% 25%, rgba(40, 91, 160, 0.14), transparent 34rem),
+    var(--cinema-bg);
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+button,
+.btn {
+  transition:
+    transform 0.22s ease,
+    box-shadow 0.22s ease,
+    border-color 0.22s ease,
+    background-color 0.22s ease;
+}
+
+button:hover,
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(124, 93, 255, 0.2);
+}
+
+input,
+select,
+textarea {
+  color: var(--cinema-text);
+  background-color: rgba(17, 24, 42, 0.92);
+  border: 1px solid var(--cinema-border);
+  border-radius: 12px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--cinema-purple);
+  box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.14);
+}
+
+/* Hero / judul utama */
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(2rem, 6vw, 5rem) 0;
+}
+
+.hero h1 {
+  color: var(--cinema-text);
+  letter-spacing: -0.045em;
+  line-height: 1.05;
+  text-wrap: balance;
+  text-shadow: 0 0 32px rgba(167, 139, 250, 0.15);
+}
+
+.hero p {
+  color: var(--cinema-muted);
+}
+
+/* Toolbar pencarian dan filter */
+
+.toolbar {
+  gap: 12px;
+  align-items: center;
+}
+
+.toolbar input,
+.toolbar select {
+  min-height: 44px;
+  box-sizing: border-box;
+}
+
+/* Kartu karakter */
+
+.card {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    155deg,
+    rgba(24, 34, 57, 0.98),
+    rgba(10, 14, 27, 0.98)
+  );
+  border: 1px solid var(--cinema-border);
+  border-radius: 18px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(167, 139, 250, 0.6);
+  box-shadow:
+    0 16px 38px rgba(0, 0, 0, 0.3),
+    0 0 22px rgba(124, 93, 255, 0.12);
+}
+
+.card img {
+  display: block;
+  max-width: 100%;
+  border-radius: 0;
+  transition: filter 0.35s ease;
+}
+
+.card:hover img {
+  filter: brightness(1.06);
+}
+
+/* Judul dan informasi karakter */
+
+.card h2,
+.card h3,
+.card h4 {
+  color: var(--cinema-text);
+  letter-spacing: -0.02em;
+}
+
+.card p {
+  color: var(--cinema-muted);
+}
+
+/* Panel detail karakter */
+
+.detailimg {
+  display: block;
+  border-radius: 14px;
+}
+
+dialog,
+.modal,
+#charDialog {
+  color: var(--cinema-text);
+}
+
+dialog {
+  background: var(--cinema-panel);
+  border: 1px solid var(--cinema-border);
+  border-radius: 18px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+}
+
+dialog::backdrop {
+  background: rgba(3, 5, 13, 0.78);
+  backdrop-filter: blur(6px);
+}
+
+/* Tombol utama */
+
+button,
+.btn {
+  border-radius: 11px;
+}
+
+button:focus-visible,
+.btn:focus-visible {
+  outline: 2px solid var(--cinema-blue);
+  outline-offset: 3px;
+}
+
+/* Animasi masuk yang lembut */
+
+@keyframes cinemaFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: cinemaFadeIn 0.45s ease both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Tampilan HP */
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 2rem 0;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 9vw, 3rem);
+  }
+
+  .toolbar {
+    gap: 8px;
+  }
+
+  .card {
+    border-radius: 14px;
+  }
+}
