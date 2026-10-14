@@ -731,3 +731,38 @@ button:focus-visible,
     transform: none;
   }
 }
+#detailDialog .detailimg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 65vh;
+  object-fit: contain;
+  object-position: center;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(75, 54, 130, 0.12),
+      transparent 72%
+    ),
+    #080b16;
+
+  border: 1px solid rgba(167, 139, 250, 0.28);
+  border-radius: 16px;
+
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.02),
+    0 10px 32px rgba(0, 0, 0, 0.22);
+
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+#detailDialog .detailimg:hover {
+  border-color: rgba(167, 139, 250, 0.48);
+
+  box-shadow:
+    0 0 22px rgba(124, 93, 255, 0.12),
+    0 12px 35px rgba(0, 0, 0, 0.28);
+}
