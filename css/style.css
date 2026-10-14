@@ -661,3 +661,73 @@ button:focus-visible,
     margin: 8px auto 24px;
   }
 }
+
+/* =========================================
+   CINEMATIC CHARACTER CARDS
+========================================= */
+
+#grid .card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid rgba(145, 157, 205, 0.2);
+  border-radius: 16px;
+  background: linear-gradient(
+    145deg,
+    #151d32,
+    #0b1020 75%
+  );
+  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.2);
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+#grid .card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(167, 139, 250, 0.7);
+  box-shadow:
+    0 16px 35px rgba(0, 0, 0, 0.32),
+    0 0 22px rgba(124, 93, 255, 0.14);
+}
+
+#grid .card img {
+  display: block;
+  max-width: 100%;
+  transition:
+    filter 0.35s ease,
+    transform 0.45s ease;
+}
+
+#grid .card:hover img {
+  filter: brightness(1.07) saturate(1.04);
+}
+
+#grid .card h2,
+#grid .card h3,
+#grid .card h4 {
+  color: #f4f2ff;
+  transition: color 0.25s ease;
+}
+
+#grid .card:hover h2,
+#grid .card:hover h3,
+#grid .card:hover h4 {
+  color: #d8ccff;
+}
+
+#grid .card p {
+  color: #aebbd5;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #grid .card,
+  #grid .card img {
+    transition: none;
+  }
+
+  #grid .card:hover {
+    transform: none;
+  }
+}
