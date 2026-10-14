@@ -766,3 +766,38 @@ button:focus-visible,
     0 0 22px rgba(124, 93, 255, 0.12),
     0 12px 35px rgba(0, 0, 0, 0.28);
 }
+#detailDialog .head button {
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+#detailDialog .head button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(103, 215, 255, 0.2);
+  border-color: #9be7ff;
+}
+
+#detailDialog .head button:active {
+  transform: translateY(0) scale(0.96);
+  box-shadow: 0 2px 8px rgba(103, 215, 255, 0.12);
+}
+
+#detailDialog .head button:focus-visible {
+  outline: 2px solid #67d7ff;
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #detailDialog .head button {
+    transition: none;
+  }
+
+  #detailDialog .head button:hover,
+  #detailDialog .head button:active {
+    transform: none;
+  }
+}
