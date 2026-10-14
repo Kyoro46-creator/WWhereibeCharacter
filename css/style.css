@@ -801,3 +801,22 @@ button:focus-visible,
     transform: none;
   }
 }
+ background:
+    radial-gradient(
+      ellipse at 50% 20%,
+      rgba(91, 67, 160, 0.10),
+      transparent 55%
+    ),
+    #0b1020;
+}
+
+#detailDialog .detailimg {
+  outline: 1px solid rgba(255, 255, 255, 0.025);
+  outline-offset: -5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #detailDialog .detailimg {
+    transition: none;
+  }
+}
